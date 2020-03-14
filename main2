@@ -1,0 +1,33 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String str;
+            while((str=br.readLine())!=null) {
+            	String[] parts = str.split(" ");
+            	int x0 = Integer.parseInt(parts[0]);
+            	int y0 = Integer.parseInt(parts[1]);
+            	int z0 = Integer.parseInt(parts[2]);
+            	int x1 = Integer.parseInt(parts[3]);
+            	int y1 = Integer.parseInt(parts[4]);
+            	int z1 = Integer.parseInt(parts[5]);
+            	double r = Math.sqrt((x1-x0)*(x1-x0)+(y1-y0)*(y1-y0)+(z1-z0)*(z1-z0));
+            	double v = Math.pow(r, 3)*Math.acos(-1)*4/3;
+            	DecimalFormat df = new DecimalFormat("0.000");//double格式问题
+            	double r1 = new BigDecimal(r).setScale(3, RoundingMode.HALF_UP).doubleValue();//四舍五入保留三位
+            	double v1 = new BigDecimal(v).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            	System.out.println(df.format(r1)+" "+df.format(v1));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
